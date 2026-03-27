@@ -10,12 +10,16 @@ href="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/
 
 <style>
 /* GLOBAL */
+html, body{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  overflow-x:hidden;
+}
 img{
   display:block;
 }
 body{
-  margin:0;
-  padding-bottom:80px;
   font-family:Arial,sans-serif;
   background:
     linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
@@ -24,6 +28,9 @@ body{
   background-position:center;
   background-repeat:no-repeat;
   color:#3a3028;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
 }
 
 /* TOPBAR */
@@ -36,6 +43,19 @@ body{
   font-weight:bold;
   backdrop-filter: blur(4px);
   text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* LOGO ZWISCHEN TOPBAR UND NAV */
+.top-logo{
+  text-align:center;
+  margin:10px 0;
+}
+.top-logo img{
+  width:150px;       /* etwas größer */
+  max-width:70%;     /* passt auf Handys */
+  height:auto;
+  display:block;
+  margin:0 auto;
 }
 
 /* MOBILE NAV */
@@ -65,18 +85,18 @@ body{
 @media(min-width:900px){
   .mainlayout{
     display:flex;
-    height:100vh; /* volle Höhe, kein Scrollen */
+    height:calc(100vh - 90px);
   }
   .sidebar{
     width:300px;
-    background:rgba(220,210,199,0.85); /* leicht transparent, Text bleibt lesbar */
+    background:rgba(220,210,199,0.85);
     padding:25px;
     display:flex;
     flex-direction:column;
     gap:20px;
     align-items:center;
     backdrop-filter: blur(6px);
-    position:sticky; /* fixiert beim Scrollen */
+    position:sticky;
     top:0;
     height:100vh;
   }
@@ -98,7 +118,7 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    overflow:hidden; /* verhindert Scrollen */
+    overflow:hidden;
   }
   .content img{
     width:100%;
@@ -119,6 +139,7 @@ body{
   .mobile-main{
     padding:12px;
     text-align:center;
+    max-width:100%;
   }
   .mobile-main img{
     width:100%;
@@ -136,10 +157,11 @@ body{
   left:0;top:0;
   width:100%;
   height:100%;
-  background:rgba(0,0,0,0.5); /* dunkler Hintergrund, Text bleibt sichtbar */
+  background:rgba(0,0,0,0.5);
   display:none;
   justify-content:center;
   align-items:center;
+  z-index:1000;
 }
 .popup-content{
   background:rgba(255,248,242,0.95);
@@ -148,7 +170,7 @@ body{
   width:450px;
   max-width:90%;
   max-height:90vh;
-  overflow:auto; /* Scroll nur, wenn Inhalt zu groß */
+  overflow:auto;
   text-align:center;
   position:relative;
   backdrop-filter: blur(8px);
@@ -199,18 +221,42 @@ body{
 
 /* FOOTER */
 .footer{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
   background:#dcd2c7;
-  padding:15px;
+  padding:15px 12px;
   text-align:center;
   font-size:0.9em;
   z-index:10;
+  width:100%;
+  box-sizing:border-box;
+  word-wrap: break-word;
 }
 
-/* MOBILE POPUPS */
+/* MOBILE FOOTER */
+@media(max-width:899px){
+  .footer{
+    font-size:0.8em;
+    padding:12px;
+  }
+}
+@media(max-width:500px){
+  .footer{
+    font-size:0.75em;
+    padding:10px;
+  }
+}
+
+/* MOBILE POPUPS & Footer Anpassung */
+@media(max-width:899px){
+  .popup{
+    z-index:1000;
+  }
+  .popup-content{
+    max-height:85vh;
+    overflow-y:auto;
+  }
+}
+
+/* MOBILE POPUPS sehr klein */
 @media(max-width:500px){
   .popup-content{
     width:90vw;
@@ -227,9 +273,6 @@ body{
   }
   .popup-content p{
     font-size:1em;
-  }
-  .footer{
-    position:relative;
   }
 }
 
@@ -253,6 +296,11 @@ body{
 
 <div class="topbar">Hundetherapie Rudolstadt</div>
 
+<!-- Logo zwischen Überschrift und Navigation -->
+<div class="top-logo">
+  <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" alt="Logo">
+</div>
+
 <div class="mobile-nav">
   <button onclick="openPopup('angebote')">Angebote</button>
   <button onclick="openPopup('kontakt')">Kontakt</button>
@@ -275,34 +323,35 @@ body{
   <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/51633ccc-2ccd-4732-baee-6466b0bac684.jpg?raw=true">
 </div>
 
-<!-- ANGEBOTE -->
+<!-- POPUPS -->
 <div class="popup" id="angebote" onclick="bgClose(event,'angebote')">
   <div class="popup-content">
     <span class="close" onclick="closePopup('angebote')">&times;</span>
     <h2>Angebote</h2>
-    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true">
+    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" style="width:120px; margin:10px auto; display:block;">
     <p>Physiotherapie</p>
     <p>Osteopathie</p>
     <p>Akupunktur</p>
   </div>
 </div>
 
-<!-- KONTAKT -->
 <div class="popup" id="kontakt" onclick="bgClose(event,'kontakt')">
   <div class="popup-content">
     <span class="close" onclick="closePopup('kontakt')">&times;</span>
-    <img class="bild-rahmen" src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Fidelio%20und%20Harry2.jpg?raw=true">
     <h2>Kontakt</h2>
+    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" style="width:120px; margin:10px auto; display:block;">
+    <img class="bild-rahmen" src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Fidelio%20und%20Harry2.jpg?raw=true">
     <p>Name: Katrin Rasche</p>
     <p>Telefon: <a href="tel:+4915774993368">01577 4993368</a></p>
     <p>E-Mail: <a href="mailto:info@canem-sentio.de">info@canem-sentio.de</a></p>
   </div>
 </div>
 
-<!-- ÜBER MICH -->
 <div class="popup" id="ueber" onclick="bgClose(event,'ueber')">
   <div class="popup-content">
     <span class="close" onclick="closePopup('ueber')">&times;</span>
+    <h2>Über mich</h2>
+    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" style="width:120px; margin:10px auto; display:block;">
     <img class="bild-rahmen" src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Foto%20Luisenturm.jpg?raw=true">
     <p>
 "Tiere sind ein Fenster zu deiner Seele und ein Tor zu deiner spirituellen Bestimmung.
@@ -330,5 +379,7 @@ function bgClose(event,id){
 }
 </script>
 
+</body>
+</html>
 </body>
 </html>
