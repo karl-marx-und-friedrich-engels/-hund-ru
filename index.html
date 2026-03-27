@@ -9,7 +9,6 @@
 href="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true">
 
 <style>
-/* GLOBAL */
 html, body{
   margin:0;
   padding:0;
@@ -45,14 +44,14 @@ body{
   text-shadow: 0 1px 3px rgba(0,0,0,0.4);
 }
 
-/* LOGO ZWISCHEN TOPBAR UND NAV */
-.top-logo{
+/* MOBILE LOGO */
+.mobile-top-logo{
+  display:none;
   text-align:center;
   margin:10px 0;
 }
-.top-logo img{
-  width:150px;       /* etwas größer */
-  max-width:70%;     /* passt auf Handys */
+.mobile-top-logo img{
+  width:120px;
   height:auto;
   display:block;
   margin:0 auto;
@@ -112,6 +111,7 @@ body{
   .sidebar img{
     width:180px;
     margin-top:25px;
+    display:block; /* Desktop-Logo bleibt */
   }
   .content{
     flex:1;
@@ -134,8 +134,10 @@ body{
 
 /* MOBILE */
 @media(max-width:899px){
+  .mobile-nav{display:flex; flex-direction:column;}
+  .mobile-top-logo{display:block;}
+  .sidebar img{display:none;} /* Sidebar-Logo auf Mobile ausblenden */
   .mainlayout{display:none;}
-  .mobile-nav{display:flex;}
   .mobile-main{
     padding:12px;
     text-align:center;
@@ -245,37 +247,6 @@ body{
   }
 }
 
-/* MOBILE POPUPS & Footer Anpassung */
-@media(max-width:899px){
-  .popup{
-    z-index:1000;
-  }
-  .popup-content{
-    max-height:85vh;
-    overflow-y:auto;
-  }
-}
-
-/* MOBILE POPUPS sehr klein */
-@media(max-width:500px){
-  .popup-content{
-    width:90vw;
-    max-height:85vh;
-    height:auto;
-    overflow-y:auto;
-    padding:18px;
-  }
-  .popup-content img{
-    height:150px;
-  }
-  .popup-content h2{
-    font-size:1.4em;
-  }
-  .popup-content p{
-    font-size:1em;
-  }
-}
-
 /* POPUP ANIMATION */
 @keyframes popupFade {
   0% {opacity:0; transform:scale(0.95);}
@@ -296,8 +267,8 @@ body{
 
 <div class="topbar">Hundetherapie Rudolstadt</div>
 
-<!-- Logo zwischen Überschrift und Navigation -->
-<div class="top-logo">
+<!-- MOBILE LOGO NUR FÜR HANDY -->
+<div class="mobile-top-logo">
   <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" alt="Logo">
 </div>
 
@@ -312,7 +283,8 @@ body{
     <button onclick="openPopup('angebote')">Angebote</button>
     <button onclick="openPopup('kontakt')">Kontakt</button>
     <button onclick="openPopup('ueber')">Über mich</button>
-    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true">
+    <!-- Desktop-Logo in Sidebar bleibt -->
+    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" alt="Logo">
   </div>
   <div class="content">
     <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/51633ccc-2ccd-4732-baee-6466b0bac684.jpg?raw=true" width="1200" height="800">
@@ -328,6 +300,7 @@ body{
   <div class="popup-content">
     <span class="close" onclick="closePopup('angebote')">&times;</span>
     <h2>Angebote</h2>
+    <!-- Logo wie vorher -->
     <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" style="width:120px; margin:10px auto; display:block;">
     <p>Physiotherapie</p>
     <p>Osteopathie</p>
@@ -339,7 +312,6 @@ body{
   <div class="popup-content">
     <span class="close" onclick="closePopup('kontakt')">&times;</span>
     <h2>Kontakt</h2>
-    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" style="width:120px; margin:10px auto; display:block;">
     <img class="bild-rahmen" src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Fidelio%20und%20Harry2.jpg?raw=true">
     <p>Name: Katrin Rasche</p>
     <p>Telefon: <a href="tel:+4915774993368">01577 4993368</a></p>
@@ -351,7 +323,6 @@ body{
   <div class="popup-content">
     <span class="close" onclick="closePopup('ueber')">&times;</span>
     <h2>Über mich</h2>
-    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true" style="width:120px; margin:10px auto; display:block;">
     <img class="bild-rahmen" src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Foto%20Luisenturm.jpg?raw=true">
     <p>
 "Tiere sind ein Fenster zu deiner Seele und ein Tor zu deiner spirituellen Bestimmung.
@@ -379,7 +350,5 @@ function bgClose(event,id){
 }
 </script>
 
-</body>
-</html>
 </body>
 </html>
