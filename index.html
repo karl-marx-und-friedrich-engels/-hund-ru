@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hundetherapie Rudolstadt</title>
+
+<link rel="icon" type="image/png"
+href="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true">
+
+<style>
+/* GLOBAL */
+img{
+  display:block;
+}
+body{
+  margin:0;
+  padding-bottom:80px;
+  font-family:Arial,sans-serif;
+  background:
+    linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.2)),
+    url("https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Design%20ohne%20Titel%20(1).png?raw=true");
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  color:#3a3028;
+}
+
+/* TOPBAR */
+.topbar{
+  background:rgba(165,139,116,0.85);
+  color:white;
+  padding:20px;
+  text-align:center;
+  font-size:1.9em;
+  font-weight:bold;
+  backdrop-filter: blur(4px);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* MOBILE NAV */
+.mobile-nav{
+  display:none;
+  background:rgba(197,179,161,0.85);
+  text-align:center;
+  padding:12px;
+  backdrop-filter: blur(4px);
+  gap:6px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.mobile-nav button{
+  margin:4px;
+  padding:16px 22px;
+  border:none;
+  border-radius:10px;
+  background:#fff8f2;
+  cursor:pointer;
+  font-size:1.1em;
+  flex:1 1 45%;
+  min-width:120px;
+}
+
+/* DESKTOP */
+@media(min-width:900px){
+  .mainlayout{
+    display:flex;
+    height:100vh; /* volle Höhe, kein Scrollen */
+  }
+  .sidebar{
+    width:300px;
+    background:rgba(220,210,199,0.85); /* leicht transparent, Text bleibt lesbar */
+    padding:25px;
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    align-items:center;
+    backdrop-filter: blur(6px);
+    position:sticky; /* fixiert beim Scrollen */
+    top:0;
+    height:100vh;
+  }
+  .sidebar button{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:10px;
+    background:#fff8f2;
+    cursor:pointer;
+    font-size:1.1em;
+  }
+  .sidebar img{
+    width:180px;
+    margin-top:25px;
+  }
+  .content{
+    flex:1;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden; /* verhindert Scrollen */
+  }
+  .content img{
+    width:100%;
+    max-width:900px;
+    height:auto;
+    aspect-ratio:3/2;
+    object-fit:cover;
+    border-radius:15px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.3);
+  }
+  .mobile-main{display:none;}
+}
+
+/* MOBILE */
+@media(max-width:899px){
+  .mainlayout{display:none;}
+  .mobile-nav{display:flex;}
+  .mobile-main{
+    padding:12px;
+    text-align:center;
+  }
+  .mobile-main img{
+    width:100%;
+    aspect-ratio:3/2;
+    object-fit:cover;
+    border-radius:15px;
+    margin-top:12px;
+    object-position:center top;
+  }
+}
+
+/* POPUPS */
+.popup{
+  position:fixed;
+  left:0;top:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5); /* dunkler Hintergrund, Text bleibt sichtbar */
+  display:none;
+  justify-content:center;
+  align-items:center;
+}
+.popup-content{
+  background:rgba(255,248,242,0.95);
+  padding:30px 25px;
+  border-radius:18px;
+  width:450px;
+  max-width:90%;
+  max-height:90vh;
+  overflow:auto; /* Scroll nur, wenn Inhalt zu groß */
+  text-align:center;
+  position:relative;
+  backdrop-filter: blur(8px);
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  gap:15px;
+  animation: popupFade 0.25s ease-out;
+}
+.popup-content h2{
+  font-size:1.6em;
+  margin:5px 0 10px 0;
+  color:#7a634c;
+}
+.popup-content p{
+  font-size:1.1em;
+  margin:4px 0;
+  line-height:1.4;
+}
+.popup-content p:not(:has(a)){
+  background:#f3e7dc;
+  padding:8px;
+  border-radius:8px;
+}
+.popup-content a{
+  color:#7a634c;
+  text-decoration:none;
+  font-weight:bold;
+}
+.popup-content a:hover{
+  text-decoration:underline;
+}
+.popup-content img{
+  width:auto;
+  height:260px;
+  max-width:100%;
+  display:block;
+  margin:15px auto;
+  object-fit:contain;
+}
+.close{
+  position:absolute;
+  right:12px;
+  top:8px;
+  cursor:pointer;
+  font-size:1.4em;
+}
+
+/* FOOTER */
+.footer{
+  position:fixed;
+  bottom:0;
+  left:0;
+  width:100%;
+  background:#dcd2c7;
+  padding:15px;
+  text-align:center;
+  font-size:0.9em;
+  z-index:10;
+}
+
+/* MOBILE POPUPS */
+@media(max-width:500px){
+  .popup-content{
+    width:90vw;
+    max-height:85vh;
+    height:auto;
+    overflow-y:auto;
+    padding:18px;
+  }
+  .popup-content img{
+    height:150px;
+  }
+  .popup-content h2{
+    font-size:1.4em;
+  }
+  .popup-content p{
+    font-size:1em;
+  }
+  .footer{
+    position:relative;
+  }
+}
+
+/* POPUP ANIMATION */
+@keyframes popupFade {
+  0% {opacity:0; transform:scale(0.95);}
+  100% {opacity:1; transform:scale(1);}
+}
+
+/* BILDRAHMEN */
+.bild-rahmen{
+  border:3px solid #e6d7c9;
+  padding:6px;
+  border-radius:12px;
+  background:#fff8f2;
+  box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">Hundetherapie Rudolstadt</div>
+
+<div class="mobile-nav">
+  <button onclick="openPopup('angebote')">Angebote</button>
+  <button onclick="openPopup('kontakt')">Kontakt</button>
+  <button onclick="openPopup('ueber')">Über mich</button>
+</div>
+
+<div class="mainlayout">
+  <div class="sidebar">
+    <button onclick="openPopup('angebote')">Angebote</button>
+    <button onclick="openPopup('kontakt')">Kontakt</button>
+    <button onclick="openPopup('ueber')">Über mich</button>
+    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true">
+  </div>
+  <div class="content">
+    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/51633ccc-2ccd-4732-baee-6466b0bac684.jpg?raw=true" width="1200" height="800">
+  </div>
+</div>
+
+<div class="mobile-main">
+  <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/51633ccc-2ccd-4732-baee-6466b0bac684.jpg?raw=true">
+</div>
+
+<!-- ANGEBOTE -->
+<div class="popup" id="angebote" onclick="bgClose(event,'angebote')">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('angebote')">&times;</span>
+    <h2>Angebote</h2>
+    <img src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Canem_Sentio_Logo_1_-removebg-preview.png?raw=true">
+    <p>Physiotherapie</p>
+    <p>Osteopathie</p>
+    <p>Akupunktur</p>
+  </div>
+</div>
+
+<!-- KONTAKT -->
+<div class="popup" id="kontakt" onclick="bgClose(event,'kontakt')">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('kontakt')">&times;</span>
+    <img class="bild-rahmen" src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Fidelio%20und%20Harry2.jpg?raw=true">
+    <h2>Kontakt</h2>
+    <p>Name: Katrin Rasche</p>
+    <p>Telefon: <a href="tel:+4915774993368">01577 4993368</a></p>
+    <p>E-Mail: <a href="mailto:info@canem-sentio.de">info@canem-sentio.de</a></p>
+  </div>
+</div>
+
+<!-- ÜBER MICH -->
+<div class="popup" id="ueber" onclick="bgClose(event,'ueber')">
+  <div class="popup-content">
+    <span class="close" onclick="closePopup('ueber')">&times;</span>
+    <img class="bild-rahmen" src="https://github.com/karl-marx-und-friedrich-engels/Hundetherapie/blob/main/Foto%20Luisenturm.jpg?raw=true">
+    <p>
+"Tiere sind ein Fenster zu deiner Seele und ein Tor zu deiner spirituellen Bestimmung.
+Wenn du sie in dein Leben lässt und ihnen erlaubst, dich zu unterrichten,
+wird es dir besser gehen." – Kim Shotola
+    </p>
+  </div>
+</div>
+
+<div class="footer">
+Diese Seite dient ausschließlich der Information über therapeutische Angebote für Tiere und ersetzt keine tierärztliche Diagnose oder Behandlung.
+</div>
+
+<script>
+function openPopup(id){
+  document.getElementById(id).style.display="flex";
+}
+function closePopup(id){
+  document.getElementById(id).style.display="none";
+}
+function bgClose(event,id){
+  if(event.target.id===id){
+    closePopup(id);
+  }
+}
+</script>
+
+</body>
+</html>
